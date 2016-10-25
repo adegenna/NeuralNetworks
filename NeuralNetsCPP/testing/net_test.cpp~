@@ -1,0 +1,42 @@
+#include "net_test.h"
+
+TEST_F(NetTest, NetInitialize) {
+  // Test network initialization
+  NeuralNet net(states_,layers_,outputs_);
+  int states  = net.getStateDim();
+  int outputs = net.getOutputDim();
+  std::vector<int> layers = net.getLayerDim();
+  EXPECT_FLOAT_EQ(states , states_);
+  EXPECT_FLOAT_EQ(outputs , outputs_);
+  EXPECT_FLOAT_EQ(3 , layers_[0]);
+  EXPECT_FLOAT_EQ(2 , layers_[1]);
+  std::vector<std::vector<Perceptron> > perceptrons = net.getPerceptrons();
+  EXPECT_EQ(perceptrons.size() , layers_.size() + 1);
+  EXPECT_EQ(perceptrons[0].size() , layers_[0]);
+  EXPECT_EQ(perceptrons[1].size() , layers_[1]);
+  EXPECT_EQ(perceptrons[2].size() , outputs_);
+  
+}
+
+TEST_F(NetTest, NetWeights) {
+  // Test ability to set random network weights
+  NeuralNet net(states_,layers_,outputs_);
+  double lower = -1.0; double upper = 1.0;
+  int states  = net.getStateDim();
+  int outputs = net.getOutputDim();
+  std::vector<int> layers = net.getLayerDim();
+  net.setRandomWeights(lower,upper);
+  std::vector<std::vector<Perceptron> > perceptrons = net.getPerceptrons();
+  std::vector<double> weights;
+  for (int i=0; i<layers.size(); i++) {
+    for (int j=0; j<layers[i]; j++) {
+      weights = perceptrons[i][j].getWeights();
+      for (int k=0; k<weights.size(); k++) {
+  	EXPECT_GE(weights[k] , lower);
+  	EXPECT_LE(weights[k] , upper);
+      }
+    }
+    weights.clear();
+  }
+  
+}

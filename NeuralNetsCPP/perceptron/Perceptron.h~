@@ -1,0 +1,33 @@
+// Implementation of the perceptron structure
+
+#ifndef PERCEPTRON_H_
+#define PERCEPTRON_H_
+
+#include <stdlib.h>
+#include <vector>
+
+class Perceptron {
+  public:
+    Perceptron();
+    Perceptron(std::vector<double> W);
+    ~Perceptron();
+    double forward(std::vector<double> X);
+    void backward(double G);
+    double getOutput();
+    std::vector<double> getInput();
+    std::vector<double> getWeights();
+    std::vector<double> getGradW();
+    std::vector<double> getGradS();
+    int getNumStates();
+    void setWeights(std::vector<double>& weights);
+    
+  private:
+    std::vector<double> W_;       // Weights
+    int numStates_;               // Number of input states
+    double Sout_;                 // Output state value
+    std::vector<double> Sin_;     // Input state values
+    std::vector<double> gradW_;   // Gradient for weights
+    std::vector<double> gradS_;   // Gradient for states
+};
+
+#endif

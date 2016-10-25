@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/tests.dir/testing/tests.cc.o CMakeFiles/tests.dir/perceptron/Perceptron.cpp.o CMakeFiles/tests.dir/net/NeuralNet.cpp.o CMakeFiles/tests.dir/testing/perceptron_test.cpp.o CMakeFiles/tests.dir/testing/net_test.cpp.o  -o tests -rdynamic -Wl,-Bstatic -lgtest -lgtest -Wl,-Bdynamic -lpthread 
